@@ -1,0 +1,20 @@
+name: Security Scanning
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight
+  push:
+    branches: [ main ]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dependency scan
+        run: |
+          npm audit
+          npm outdated
+          
+      - name: OWASP ZAP Scan
+        uses: zaproxy/action-full-scan@v0.4.0
+        with:
+          target: 'https://staging.securecart.com'
