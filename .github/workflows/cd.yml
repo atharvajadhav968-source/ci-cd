@@ -1,0 +1,23 @@
+name: Secure CD Pipeline
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Security check
+        run: |
+          npm audit
+          npm run security-scan
+          
+      - name: Deploy
+        run: |
+          echo "Deploying to production..."
+          # Add deployment commands here
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
