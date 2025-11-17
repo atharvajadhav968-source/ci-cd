@@ -1,0 +1,9 @@
+{
+  "name": "secure-project",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Running tests...\"",
+    "lint": "echo \"Running lint...\"",
+    "security-scan": "echo \"Running custom security scan...\""
+  }
+}
